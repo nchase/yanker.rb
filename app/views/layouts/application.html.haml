@@ -1,0 +1,55 @@
+!!!
+%html{ :lang => "en", :class => 'no-js'}
+
+  %head
+    %meta{ :charset => "utf-8" }
+    %meta{ :name => "description", :content => "ROOK FOOD WEB PUBLISHING ENGINE © 2010 - #{Time.now.year}" }
+    %meta{ :name => 'google-site-verification', :content => 'xRd1I0t8vgPCZS_kUrl_a4q05NfaDp3B7M9Ep8CgGB0'}
+
+    = stylesheet_link_tag 'compiled/application'
+
+    = javascript_include_tag 'jquery-1.4.2.min','jquery.color'
+    = javascript_include_tag 'jquery.validate','jquery.metadata','jquery.form'
+    = javascript_include_tag 'global','functions'
+    :javascript
+      (function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)
+
+    = auto_discovery_link_tag(:rss, posts_url(:rss))
+
+    %title= titles
+
+  %body{ :class => "#{controller_name} #{action_name}" }
+    #container-wrap
+      #container
+        =# debug(params)
+        #minimenu
+          = link_to "H", ( action_name == 'upload' ? root_path : about_path ), :class => "about"
+          = link_to "RSS", posts_url(:rss), :class => "rss"
+          = link_to "U", upload_path
+
+          = render "shared/legend"
+        #header-wrap.clearfix
+          #header
+            %h1
+              - link_to ( action_name == 'upload' ? '/upload' : root_url ) do
+                %span= "All Right #{flavors}"
+          - link_to root_url, :class => 'rook' do
+            = image_tag('rook.png')
+
+        #main
+          #content.clearfix
+            = yield
+
+
+    - unless ENV['RAILS_ENV'] == 'development'
+      %script{ :type => "text/javascript", :src => "http://www.google.com/jsapi?key=ABQIAAAAAI0U7dOyWxxF_cSIW4nMZRQUf-GQY53jhryJH-ckv_I3h-YPthQB0gxh7mpHNrStSVn2yAWiCdTq3Q" }
+      :javascript
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-57092-16']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
