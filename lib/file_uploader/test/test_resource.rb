@@ -19,18 +19,22 @@ class TestLocal < Test::Unit::TestCase
 
 	def test_uri_is_string
 		assert_equal(@resource_file.uri.class, String, "test uri is a string")
+		assert_equal(@resource_url.uri.class, String, "test uri is a string")
 	end
 
 	def test_additional_uri_params
 		assert_equal(1, paramify(@resource_file.extension).split(".").length, "uri is properly split on extension and the instance variable knows what this looks like. uri params don't affect split")
+		assert_equal(1, paramify(@resource_url.extension).split(".").length, "uri is properly split on extension and the instance variable knows what this looks like. uri params don't affect split")
 	end
 
 	def test_extension
 		assert_equal("jpg", @resource_file.extension, "resource knows its extension")
+		assert_equal("jpg", @resource_url.extension, "resource knows its extension")
 	end
 
 	def test_uri_mimetype_is_expected
 		assert_equal(@resource_file.mime_type(paramify(@resource_file.uri)), "image/jpeg")
+		assert_equal(@resource_url.mime_type(paramify(@resource_url.uri)), "image/jpeg")
 	end
 
 	def test_uuid_is_expected

@@ -33,10 +33,6 @@ module FileUploader
 		def uri
 			@file.path
 		end
-
-		# write a create_uuid that also checks some delta of the filesize:
-		# def create_uuid
-		# end
 	end
 
 	class HTTPResource < Resource
