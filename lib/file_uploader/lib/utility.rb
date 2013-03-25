@@ -1,12 +1,15 @@
 module FileUploader
 	module Utility
 		class Resource
-			attr_reader :uri, :upload_name, :mime_type, :is_image, :is_http, :is_tempfile, :resource_file
+			require 'mime-types'
+
+			attr_reader :uri, :upload_name, :is_image, :is_http, :is_tempfile, :resource_file, :basename
 			attr_accessor :link, :sizes, :extension
 
 			def initialize(resource)
 				@uri = resource.path
-				@resource_file = resource
+				@file = resource
+				@basename = File.basename(@file)
 
 				build_metadata
 			end
@@ -14,8 +17,6 @@ module FileUploader
 			def build_metadata
 				@upload_name = File.basename(uri).split(".").first
 				@extension = uri.downcase.split(".").last.split("?").first
-				get_mime_type
-				@is_image = mime_type.split("/")[0] ==	"image" ? true: false
 
 				@is_http = uri =~ /^http:\/\// ? true : false
 
@@ -31,19 +32,14 @@ module FileUploader
 			end
 		end
 
-		def get_mime_type
-			@mime_type = case extension
-				when "mp3" then "audio/mpeg"
-				when "txt" then "text/plain"
-				when "gif" then "image/gif"
-				when "jpg" then "image/jpeg"
-				when "jpeg" then "image/jpeg"
-				when "png" then "image/png"
-				when "bmp" then "image/bmp"
-				when "pdf" then "application/pdf"
-				when "rb" then "text/plain"
-				else "application/octet-stream"
-			end
+		def image
+			mime_type.split("/")[0] ==	"image" ? true: false
+		end
+
+		def mime_type(uri)
+			clean_uri = uri.split("?").first
+
+			MIME::Types.type_for(clean_uri).first
 		end
 
 		def make_temp_images
