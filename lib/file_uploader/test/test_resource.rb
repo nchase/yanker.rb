@@ -23,8 +23,8 @@ class TestLocal < Test::Unit::TestCase
 	end
 
 	def test_additional_uri_params
-		assert_equal(1, paramify(@resource_file.extension).split(".").length, "uri is properly split on extension and the instance variable knows what this looks like. uri params don't affect split")
-		assert_equal(1, paramify(@resource_url.extension).split(".").length, "uri is properly split on extension and the instance variable knows what this looks like. uri params don't affect split")
+		assert_equal(1, paramify(@resource_file.extension).split(".").length, "uri is properly split on extension")
+		assert_equal(1, paramify(@resource_url.extension).split(".").length, "uri is properly split on extension")
 	end
 
 	def test_extension
