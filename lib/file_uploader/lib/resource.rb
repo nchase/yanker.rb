@@ -1,27 +1,20 @@
 module FileUploader
 	class Resource
 		require 'mime-types'
+		require 'digest/md5'
 
-		attr_reader :uri, :upload_name, :is_image, :is_tempfile, :resource_file, :basename, :extension, :path
+		attr_reader :uri, :basename, :extension, :path, :uuid
 		attr_accessor :link, :sizes, :extension
 
 		def initialize(resource)
 		end
 
-		def build_metadata
-			@upload_name = File.basename(uri).split(".").first
-
-			# should this behavior go somewhere else?
-			require 'digest/md5'
-			@upload_name = Digest::MD5.hexdigest(@upload_name)
+		def create_uuid
+			@uuid = Digest::MD5.hexdigest(@file.path)
 		end
 
 		def extension
 			self.uri.chomp.downcase.gsub(/.*\./o, '')
-		end
-
-		def image
-			mime_type.split("/")[0] ==	"image" ? true: false
 		end
 
 		def mime_type(uri)
@@ -34,22 +27,21 @@ module FileUploader
 	class FileResource < Resource
 		def initialize(resource)
 			@file = resource
-
 			@basename = File.basename(resource)
-
-			build_metadata
 		end
 
 		def uri
 			@file.path
 		end
+
+		# write a create_uuid that also checks some delta of the filesize:
+		# def create_uuid
+		# end
 	end
 
 	class HTTPResource < Resource
 		def initialize(resource)
 			@file = resource
-
-			build_metadata
 		end
 
 		def uri

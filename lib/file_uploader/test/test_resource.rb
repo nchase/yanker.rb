@@ -33,6 +33,14 @@ class TestLocal < Test::Unit::TestCase
 		assert_equal(@resource_file.mime_type(paramify(@resource_file.uri)), "image/jpeg")
 	end
 
+	def test_uuid_is_expected
+		# note: this might not actually be globally unique.
+		# figure out whether or not this is true and improve
+		# if necessary.
+
+		assert_equal("30d70aae38dfe202d62229346644e5d4", @resource_file.create_uuid)
+	end
+
 	def paramify(string)
 		string + PARAM
 	end
