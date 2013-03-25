@@ -4,7 +4,6 @@ module FileUploader
 		require 'digest/md5'
 
 		attr_reader :uri, :basename, :extension, :path, :uuid
-		attr_accessor :link, :sizes, :extension
 
 		def initialize(resource)
 		end
