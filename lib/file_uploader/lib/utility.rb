@@ -1,18 +1,17 @@
 module FileUploader
 	module Utility
 		class Resource
-			attr_reader :uri, :upload_name, :mime_type, :is_image, :is_http, :is_tempfile, :og_resource
+			attr_reader :uri, :upload_name, :mime_type, :is_image, :is_http, :is_tempfile, :resource_file
 			attr_accessor :link, :sizes, :extension
 
-			def initialize(*resource)
-				@uri = (resource[0].respond_to?('path') ? resource[0].path : resource[0]) #removing argv[0] as the default argument here...jesus
-				@is_tempfile = resource[0].class == Tempfile
-				@og_resource = resource[0]
+			def initialize(resource)
+				@uri = resource.path
+				@resource_file = resource
 			end
 
 			def compute
 				@upload_name = File.basename(uri).split(".").first
-				@extension = is_tempfile ? og_resource.original_filename.downcase.split(".").last : uri.downcase.split(".").last.split("?").first
+				@extension = uri.downcase.split(".").last.split("?").first
 				@mime_type = case extension
 					when "mp3" then "audio/mpeg"
 					when "txt" then "text/plain"
