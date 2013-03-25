@@ -13,8 +13,8 @@ class TestLocal < Test::Unit::TestCase
 		resource_file = File.open(File.expand_path("../../test/fixtures/#{FILENAME}", __FILE__))
 		resource_url = "http://content.internetvideoarchive.com/content/photos/6894/28955235_.jpg"
 
-		@resource_file = FileUploader::FileResource.new(resource_file)
-		@resource_url = FileUploader::HTTPResource.new(resource_url)
+		@resource_file = FileUploader::Resource.create(resource_file)
+		@resource_url = FileUploader::Resource.create(resource_url)
 	end
 
 	def test_uri_is_string
