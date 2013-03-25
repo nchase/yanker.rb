@@ -7,23 +7,14 @@ module FileUploader
 			def initialize(resource)
 				@uri = resource.path
 				@resource_file = resource
+
+				build_metadata
 			end
 
-			def compute
+			def build_metadata
 				@upload_name = File.basename(uri).split(".").first
 				@extension = uri.downcase.split(".").last.split("?").first
-				@mime_type = case extension
-					when "mp3" then "audio/mpeg"
-					when "txt" then "text/plain"
-					when "gif" then "image/gif"
-					when "jpg" then "image/jpeg"
-					when "jpeg" then "image/jpeg"
-					when "png" then "image/png"
-					when "bmp" then "image/bmp"
-					when "pdf" then "application/pdf"
-					when "rb" then "text/plain"
-					else "application/octet-stream"
-				end
+				get_mime_type
 				@is_image = mime_type.split("/")[0] ==	"image" ? true: false
 
 				@is_http = uri =~ /^http:\/\// ? true : false
@@ -39,6 +30,22 @@ module FileUploader
 				@upload_name = Digest::MD5.hexdigest(@upload_name)
 			end
 		end
+
+		def get_mime_type
+			@mime_type = case extension
+				when "mp3" then "audio/mpeg"
+				when "txt" then "text/plain"
+				when "gif" then "image/gif"
+				when "jpg" then "image/jpeg"
+				when "jpeg" then "image/jpeg"
+				when "png" then "image/png"
+				when "bmp" then "image/bmp"
+				when "pdf" then "application/pdf"
+				when "rb" then "text/plain"
+				else "application/octet-stream"
+			end
+		end
+
 		def make_temp_images
 			require 'RMagick'
 			image_holder = Magick::ImageList.new
