@@ -15,26 +15,31 @@ class TestLocal < Test::Unit::TestCase
 
 		@resource_file = FileUploader::Resource.create(resource_file)
 		@resource_url = FileUploader::Resource.create(resource_url)
+		@resources = [@resource_file, @resource_url]
 	end
 
 	def test_uri_is_string
-		assert_equal(@resource_file.uri.class, String, "test uri is a string")
-		assert_equal(@resource_url.uri.class, String, "test uri is a string")
+		@resources.each { |resource|
+			assert_equal(resource.uri.class, String, "test uri is a string")
+		}
 	end
 
 	def test_additional_uri_params
-		assert_equal(1, paramify(@resource_file.extension).split(".").length, "uri is properly split on extension")
-		assert_equal(1, paramify(@resource_url.extension).split(".").length, "uri is properly split on extension")
+		@resources.each { |resource|
+			assert_equal(nil, paramify(resource.extension).split("?").first.match(/(\?|\.|&)/), "uri is properly split on extension")
+		}
 	end
 
 	def test_extension
-		assert_equal("jpg", @resource_file.extension, "resource knows its extension")
-		assert_equal("jpg", @resource_url.extension, "resource knows its extension")
+		@resources.each { |resource|
+			assert_equal("jpg", resource.extension, "resource knows its extension")
+		}
 	end
 
 	def test_uri_mimetype_is_expected
-		assert_equal(@resource_file.mime_type(paramify(@resource_file.uri)), "image/jpeg")
-		assert_equal(@resource_url.mime_type(paramify(@resource_url.uri)), "image/jpeg")
+		@resources.each { |resource|
+			assert_equal(resource.mime_type(paramify(@resource_file.uri)), "image/jpeg")
+		}
 	end
 
 	def test_uuid_is_expected
@@ -43,6 +48,7 @@ class TestLocal < Test::Unit::TestCase
 		# if necessary.
 
 		assert_equal("30d70aae38dfe202d62229346644e5d4", @resource_file.pseudo_uuid)
+		# we need another test here for http resources.
 	end
 
 	def test_file_basename_is_correct
