@@ -15,12 +15,21 @@ module FileUploader
 
 		@temp_holder = Array.new
 
-		if @resource.is_image
-			make_temp_images
-		else
-			make_temp_other
-		end
+		make_temp
 
 		return @resource
+	end
+
+	def make_temp
+		if @resource.is_http
+			status, f = Net::HTTP.get_response(URI.parse(@resource.uri))
+			File.open("#{RAILS_ROOT}/tmp/#{@resource.upload_name}.#{@resource.extension}", 'wb') do |open_file|
+				open_file.print(f)
+			end
+		else
+			require "ftools"
+			File.copy(@resource.uri,"#{RAILS_ROOT}/tmp/#{@resource.upload_name}.#{@resource.extension}")
+			@temp_holder << "#{RAILS_ROOT}/tmp/#{@resource.upload_name}.#{@resource.extension}"
+		end
 	end
 end
