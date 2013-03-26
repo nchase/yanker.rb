@@ -1,7 +1,7 @@
 require 'test/unit'
-require_relative '../lib/resource.rb'
-
 require 'debugger'
+
+require_relative '../lib/resource.rb'
 
 include FileUploader
 
