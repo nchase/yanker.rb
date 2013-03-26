@@ -42,6 +42,10 @@ module FileUploader
 		def uri
 			self.path
 		end
+
+		def basename
+			File.basename(@file)
+		end
 	end
 
 	class HTTPResource < Resource

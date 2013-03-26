@@ -45,6 +45,10 @@ class TestLocal < Test::Unit::TestCase
 		assert_equal("30d70aae38dfe202d62229346644e5d4", @resource_file.pseudo_uuid)
 	end
 
+	def test_file_basename_is_correct
+		assert_equal(FILENAME, @resource_file.basename)
+	end
+
 	def paramify(string)
 		string + PARAM
 	end
