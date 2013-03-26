@@ -42,7 +42,7 @@ class TestLocal < Test::Unit::TestCase
 		# figure out whether or not this is true and improve
 		# if necessary.
 
-		assert_equal("30d70aae38dfe202d62229346644e5d4", @resource_file.create_uuid)
+		assert_equal("30d70aae38dfe202d62229346644e5d4", @resource_file.pseudo_uuid)
 	end
 
 	def paramify(string)

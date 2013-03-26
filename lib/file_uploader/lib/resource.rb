@@ -3,22 +3,20 @@ module FileUploader
 		require 'mime-types'
 		require 'digest/md5'
 
-		attr_reader :uri, :basename, :extension, :path, :uuid
-
 		def self.create(resource)
 			if resource.class == File
-				FileUploader::FileResource.new(resource)
-			else
-				FileUploader::HTTPResource.new(resource)
+				return FileUploader::FileResource.new(resource)
 			end
+
+			FileUploader::HTTPResource.new(resource)
 		end
 
 		def initialize(resource)
 			@file = resource
 		end
 
-		def create_uuid
-			@uuid = Digest::MD5.hexdigest(self.path)
+		def pseudo_uuid
+			Digest::MD5.hexdigest(self.path)
 		end
 
 		def extension
@@ -29,6 +27,10 @@ module FileUploader
 			@file.path
 		end
 
+		def uri
+			@file
+		end
+
 		def mime_type(uri)
 			clean_uri = uri.split("?").first
 
@@ -37,19 +39,11 @@ module FileUploader
 	end
 
 	class FileResource < Resource
-		def initialize(resource)
-			super
-			@basename = File.basename(resource)
-		end
-
 		def uri
 			self.path
 		end
 	end
 
 	class HTTPResource < Resource
-		def uri
-			@file
-		end
 	end
 end
