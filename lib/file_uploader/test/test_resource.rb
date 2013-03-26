@@ -3,8 +3,6 @@ require 'debugger'
 
 require_relative '../lib/resource.rb'
 
-include FileUploader
-
 class TestLocal < Test::Unit::TestCase
 	FILENAME = "c43a8cbe52fecbe6fa25f0b85abb44f6_o.jpg"
 	PARAM = "?#{Time.now.to_i}&whyisthisurlsoLong=true&thisistotallyaRealURI.bleh"
