@@ -2,6 +2,8 @@ module FileUploader
 	class Resource
 		require 'mime-types'
 		require 'digest/md5'
+		require 'fileutils'
+
 
 		def self.create(resource)
 			if resource.class == File

@@ -7,5 +7,11 @@ module FileUploader
 		def basename
 			File.basename(@file)
 		end
+
+		def initialize(resource)
+			super
+
+			FileUtils.copy(self.uri, self.basename)
+		end
 	end
 end
