@@ -17,6 +17,9 @@ class TestTempFiles < Test::Unit::TestCase
 	end
 
 	def teardown
+		@resources.each { |resource|
+			FileUtils.rm(resource.tempfile)
+		}
 	end
 
 	def test_temp_files_for_local

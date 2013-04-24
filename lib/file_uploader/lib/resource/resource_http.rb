@@ -10,6 +10,8 @@ module FileUploader
 			File.open(self.basename, 'wb') do |open_file|
 				open_file.print(file)
 			end
+
+			self.tempfile = File.open(self.basename)
 		end
 
 		def basename

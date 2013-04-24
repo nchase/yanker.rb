@@ -4,6 +4,7 @@ module FileUploader
 		require 'digest/md5'
 		require 'fileutils'
 
+		attr_accessor :tempfile
 
 		def self.create(resource)
 			if resource.class == File

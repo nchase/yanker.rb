@@ -12,6 +12,8 @@ module FileUploader
 			super
 
 			FileUtils.copy(self.uri, self.basename)
+
+			self.tempfile = File.open(self.basename)
 		end
 	end
 end
