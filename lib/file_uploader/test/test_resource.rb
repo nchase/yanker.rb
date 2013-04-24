@@ -16,6 +16,10 @@ class TestLocal < Test::Unit::TestCase
 		@resources = [@resource_file, @resource_url]
 	end
 
+	def teardown
+		@resources.each { |resource| resource.destroy }
+	end
+
 	def test_uri_is_string
 		@resources.each { |resource|
 			assert_equal(resource.uri.class, String, "test uri is a string")

@@ -39,5 +39,11 @@ module FileUploader
 
 			MIME::Types.type_for(clean_uri).first
 		end
+
+		def destroy
+			# destroys local temporary file
+
+			FileUtils.rm(self.tempfile)
+		end
 	end
 end
