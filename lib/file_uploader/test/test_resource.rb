@@ -1,9 +1,9 @@
 require 'test/unit'
 require 'debugger'
 
-require_relative '../lib/resource.rb'
+require_relative '../lib/resource'
 
-class TestLocal < Test::Unit::TestCase
+class TestResource < Test::Unit::TestCase
 	FILENAME = "c43a8cbe52fecbe6fa25f0b85abb44f6_o.jpg"
 	PARAM = "?#{Time.now.to_i}&whyisthisurlsoLong=true&thisistotallyaRealURI.bleh"
 
@@ -19,7 +19,9 @@ class TestLocal < Test::Unit::TestCase
 	def teardown
 		@resources.each { |resource| resource.destroy }
 	end
+end
 
+class TestBaseMethods < TestResource
 	def test_uri_is_string
 		@resources.each { |resource|
 			assert_equal(resource.uri.class, String, "test uri is a string")
