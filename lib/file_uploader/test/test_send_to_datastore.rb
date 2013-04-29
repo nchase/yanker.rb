@@ -6,6 +6,13 @@ class TestDataStore < TestResource
 	S3_SECRET = S3_CONFIG['secret_access_key']
 	S3_BUCKET = S3_CONFIG['bucket']
 
+	def teardown
+		@resources.each { |resource|
+			resource.destroy
+			resource.destroy_s3
+		}
+	end
+
 	def test_sends_to_datastore
 		@resources.each { |resource|
 			resource.send(S3_KEY, S3_SECRET, S3_BUCKET)

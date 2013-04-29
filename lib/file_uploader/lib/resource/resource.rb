@@ -53,6 +53,10 @@ module FileUploader
 			FileUtils.rm(self.tempfile)
 		end
 
+		def destroy_s3
+			S3Resource.delete(self.basename)
+		end
+
 		def send(key, secret, bucket)
 			AWS::S3::Base.establish_connection!(
 				:access_key_id => key,
