@@ -51,7 +51,7 @@ class TestBaseMethods < TestResource
 		# figure out whether or not this is true and improve
 		# if necessary.
 
-		assert_equal("30d70aae38dfe202d62229346644e5d4", @resource_file.pseudo_uuid)
+		assert_equal("4381aa9d0489dc3bd0096bfac7364629", @resource_file.pseudo_uuid)
 		# we need another test here for http resources.
 	end
 
