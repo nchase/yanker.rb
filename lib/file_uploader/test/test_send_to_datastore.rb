@@ -10,7 +10,11 @@ class TestDataStore < TestResource
 		@resources.each { |resource|
 			resource.send(S3_KEY, S3_SECRET, S3_BUCKET)
 
-			assert(AWS::S3::S3Object.exists?(resource.basename))
+			assert(S3Resource.exists?(resource.basename))
 		}
+	end
+
+	class S3Resource < AWS::S3::S3Object
+		set_current_bucket_to S3_BUCKET
 	end
 end

@@ -59,12 +59,17 @@ module FileUploader
 				:secret_access_key => secret
 			)
 
-			AWS::S3::S3Object.store(
-				self.path,
-				bucket,
+			S3Resource.store(
+				self.basename,
+				File.open(self.path),
+				S3_BUCKET,
 				:access => :public_read,
 				:use_virtual_directories => true
 			)
+		end
+
+		class S3Resource < AWS::S3::S3Object
+			set_current_bucket_to S3_BUCKET
 		end
 	end
 end

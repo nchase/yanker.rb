@@ -17,5 +17,9 @@ module FileUploader
 		def basename
 			File.basename(self.uri)
 		end
+
+		def path
+			File.realdirpath(self.tempfile)
+		end
 	end
 end
