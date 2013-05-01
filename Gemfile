@@ -3,9 +3,10 @@ gem 'mime-types'
 gem 'aws-s3'
 
 group :test do
-  gem 'debugger'
-  gem 'rspec'
   gem 'rake'
+  gem 'rspec'
+  gem 'simplecov'
   gem 'ZenTest'
   gem 'autotest-fsevent'
+  gem 'debugger'
 end
