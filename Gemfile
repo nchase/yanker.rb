@@ -6,4 +6,6 @@ group :test do
   gem 'debugger'
   gem 'rspec'
   gem 'rake'
+  gem 'ZenTest'
+  gem 'autotest-fsevent'
 end
