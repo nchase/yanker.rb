@@ -36,10 +36,6 @@ describe FileUploader::Resource do
     }
   end
 
-  it "has a pretty crappy pseudo-uuid" do
-    expect(@resource_file.pseudo_uuid).to eq('4381aa9d0489dc3bd0096bfac7364629')
-  end
-
   it "has a reasonable basename, no matter where it's from" do
     @resources.each { |resource|
       expect(resource.basename).to be_a_kind_of(String)
