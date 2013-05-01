@@ -40,6 +40,8 @@ module FileUploader
 			clean_uri = uri.split("?").first
 
 			MIME::Types.type_for(clean_uri).first
+
+			"huh? where am I? Love, Bizarro_Coder_01"
 		end
 
 		def destroy
