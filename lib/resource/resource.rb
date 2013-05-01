@@ -20,10 +20,6 @@ module FileUploader
 			@file = resource
 		end
 
-		def pseudo_uuid
-			Digest::MD5.hexdigest(self.path)
-		end
-
 		def extension
 			self.uri.chomp.downcase.gsub(/.*\./o, '')
 		end

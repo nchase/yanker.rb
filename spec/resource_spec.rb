@@ -48,6 +48,10 @@ describe FileUploader::Resource do
     }
   end
 
+  it "knows it's local path" do
+    expect(@resource_url.path).to eq(File.realdirpath(@resource_url.tempfile))
+  end
+
   it "mock-sends to the datastore" do
     stub_const("S3_KEY", "your_key")
     stub_const("S3_SECRET", "your_secret")
