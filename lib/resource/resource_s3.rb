@@ -15,7 +15,11 @@ module S3Resource
     S3Object.delete(self.basename)
   end
 
-  def send(key, secret, bucket)
+  def send(arguments)
+    key = arguments[:key] || S3_KEY
+    secret = arguments[:secret] || S3_SECRET
+    bucket = arguments[:bucket] || S3_BUCKET
+
     AWS::S3::Base.establish_connection!(
       :access_key_id => key,
       :secret_access_key => secret
