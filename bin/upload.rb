@@ -1,6 +1,4 @@
 require_relative '../lib/resource'
-require 'debugger'
-
 
 
 if (!ARGV[0].match(/^http/))
@@ -9,4 +7,4 @@ else
   resource = FileUploader::Resource.create(ARGV[0])
 end
 
-resource.send({})
+resource.send
