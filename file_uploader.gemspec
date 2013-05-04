@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'file_uploader/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "file_uploader"
+  spec.name          = "yanker"
   spec.version       = FileUploader::VERSION
   spec.authors       = ["Noah Chase"]
   spec.email         = ["nchase@gmail.com"]
