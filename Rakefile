@@ -1,5 +1,6 @@
 require 'rake/testtask'
 require 'rspec/core/rake_task'
+require 'bundler'
 
 task :default => :spec
 
@@ -15,3 +16,5 @@ task :coverage do
   `rake spec`
   `open coverage/index.html`
 end
+
+Bundler::GemHelper.install_tasks
