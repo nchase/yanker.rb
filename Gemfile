@@ -9,4 +9,5 @@ group :test do
   gem 'ZenTest'
   gem 'autotest-fsevent'
   gem 'debugger'
+  gem 'coveralls', :require => false
 end
