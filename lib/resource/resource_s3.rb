@@ -2,7 +2,12 @@ require 'aws/s3'
 require 'yaml'
 
 module S3Resource
-  S3_CONFIG = YAML.load_file(File.expand_path('../../../config/s3.yaml', __FILE__))
+  if (defined?(Rails))
+    S3_CONFIG = YAML.load_file("#{Rails.root}/config/yanker.yaml")
+  else
+    S3_CONFIG = YAML.load_file(File.expand_path('../../../config/s3.yaml', __FILE__))
+  end
+
   S3_KEY    = S3_CONFIG['access_key_id']
   S3_SECRET = S3_CONFIG['secret_access_key']
   S3_BUCKET = S3_CONFIG['bucket']
