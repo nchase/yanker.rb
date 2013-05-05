@@ -19,6 +19,7 @@ module S3Resource
     key = arguments[:key] || S3_KEY
     secret = arguments[:secret] || S3_SECRET
     bucket = arguments[:bucket] || S3_BUCKET
+    filename = arguments[:filename] || self.basename
 
     AWS::S3::Base.establish_connection!(
       :access_key_id => key,
@@ -26,7 +27,7 @@ module S3Resource
     )
 
     S3Object.store(
-      self.basename,
+      filename,
       File.open(self.path),
       S3_BUCKET,
       :access => :public_read,
