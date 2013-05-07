@@ -1,4 +1,4 @@
 require 'coveralls'
 require 'simplecov'
-Coveralls.wear!
+SimpleCov.formatter = Coveralls::SimpleCov::Formatter
 SimpleCov.start
