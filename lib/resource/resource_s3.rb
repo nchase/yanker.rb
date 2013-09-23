@@ -38,5 +38,7 @@ module S3Resource
       :access => :public_read,
       :use_virtual_directories => true
     )
+
+    return "#{S3_BUCKET + '/' + self.basename}"
   end
 end
